@@ -14,13 +14,23 @@ A simple web application for my favourite restaurant.
 
 ### Installation & Execution
 1. Open terminal and clone the repo to local
+    ```
     git clone https://github.com/ShuenRachel/restaurant_list.git
+    ```
 2. Move to repo file
+    ```
     cd restaurant_list
+    ```
 3. Start dependencies installation 
+    ```
     npm install
+    ```
 4. Start Express server in Node.js
+    ```
     npm run start
+    ```
    OR
    Start Express server in dev mode (By Nodemon)
+    ```
     npm run dev
+    ```
