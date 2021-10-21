@@ -20,10 +20,6 @@ app.get('/search', (req, res) => {
     return restaurant.name.toLowerCase().includes(keywords) || restaurant.name_en.toLowerCase().includes(keywords) ||
     restaurant.category.toLowerCase().includes(keywords)
   })
-  if(!restaurants.length) {
-    console.log('No search result')
-  }
-
   res.render('index', { restaurants: restaurants, keywords:  keywords })
 })
 

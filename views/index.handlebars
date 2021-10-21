@@ -19,6 +19,7 @@
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
+    {{#if restaurants}}
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurants}}
@@ -44,5 +45,15 @@
         {{/each}}
       </div>
     </div>
+    {{else}}
+    <div class="col-md-10 col-12 mx-auto">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1>噢⋯</h1>
+        <i class="far fa-sad-tear fa-10x"></i>
+        <h2 class="mt-3">沒有符合搜尋結果的餐廳</h2>
+        <p>試試看其他關鍵字吧！</p>
+      </div>
+    </div>
+    {{/if}}
   </div>
 </div>
