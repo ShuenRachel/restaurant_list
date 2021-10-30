@@ -25,6 +25,7 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
+// Index 頁面：瀏覽全部所有餐廳
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 搜尋功能
 app.get('/search', (req, res) => {
   const keywords = req.query.keyword.toLowerCase().trim()
   Restaurant.find()
@@ -45,28 +47,30 @@ app.get('/search', (req, res) => {
     })
 })
 
-app.get('/restaurants/new', (req, res) => {
-  return res.render('new')
-})
-
+// New 頁面：新增一家餐廳
 app.post('/restaurants', (req, res) => {
   const newRestaurant = req.body
 
-  return Restaurant.create({ 
-    name: newRestaurant.name ,
-    name_en: newRestaurant.name_en ,
-    category: newRestaurant.category ,
-    image: newRestaurant.image ,
-    location: newRestaurant.location ,
-    phone: newRestaurant.phone ,
-    google_map: newRestaurant.google_map ,
-    rating: Number(newRestaurant.rating) ,
-    description: newRestaurant.description ,
+  return Restaurant.create({
+    name: newRestaurant.name,
+    name_en: newRestaurant.name_en,
+    category: newRestaurant.category,
+    image: newRestaurant.image,
+    location: newRestaurant.location,
+    phone: newRestaurant.phone,
+    google_map: newRestaurant.google_map,
+    rating: Number(newRestaurant.rating),
+    description: newRestaurant.description,
   })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+// 瀏覽一家餐廳的詳細資訊
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -75,6 +79,7 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 刪除一家餐廳
 app.post('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -83,7 +88,7 @@ app.post('/restaurants/:id/delete', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
+// 修改一家餐廳的資訊
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)

@@ -2,13 +2,17 @@
 A simple web application for my favourite restaurant.
 
 ## Features
-- listing movies from my favourite restaurant file
+- listing restaurant from my favourite restaurant database
 - searching restaurant by name and category
 - checking details of each restaurant
+- creating new restaurant
+- updating restaurant information
+- deleting restaurant
 
 ### Prerequisites
 - Visual Studio Code
 - Node.js (v14.16.0)
+- npm
 - Express
 - Express-Handlebars
 
@@ -33,4 +37,9 @@ A simple web application for my favourite restaurant.
    Start Express server in dev mode (By Nodemon)
     ```
     npm run dev
+    ```
+5. Connect to http://localhost:3000
+6. To quit from server:
+    ```
+    ctrl + c
     ```
