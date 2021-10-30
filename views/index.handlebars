@@ -19,9 +19,6 @@
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto row mb-2 justify-content-end">
-      <a href="./restaurants/new" class="btn btn-outline-info my-2 my-sm-0 ">新增餐廳</a>
-    </div>
     {{#if restaurants}}
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
@@ -45,9 +42,9 @@
             </div>
             <div class="card-footer text-muted">
               <div class="row justify-content-end px-1">
-                <a href="./restaurants/{{ this._id }}" class="btn btn-secondary">詳細</a>
+                <a href="./restaurants/{{ this._id }}/edit" class="btn btn-outline-secondary mr-1">編輯</a>
+                <a href="./restaurants/{{ this._id }}" class="btn btn-outline-secondary">詳細</a>
               </div>
-              
             </div>
           </div>
         </a>
