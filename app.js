@@ -4,6 +4,7 @@ const port = 3000
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
+const restaurantList = require('./restaurant.json')
 
 // 連線資料庫
 mongoose.connect('mongodb://localhost/restaurant-list')
@@ -22,6 +23,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   Restaurant.find()
@@ -37,6 +39,28 @@ app.get('/search', (req, res) => {
     restaurant.category.toLowerCase().includes(keywords)
   })
   res.render('index', { restaurants: restaurants, keywords:  keywords })
+})
+
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  const newRestaurant = req.body
+
+  return Restaurant.create({ 
+    name: newRestaurant.name ,
+    name_en: newRestaurant.name_en ,
+    category: newRestaurant.category ,
+    image: newRestaurant.image ,
+    location: newRestaurant.location ,
+    phone: newRestaurant.phone ,
+    google_map: newRestaurant.google_map ,
+    rating: Number(newRestaurant.rating) ,
+    description: newRestaurant.description ,
+  })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
