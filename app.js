@@ -34,11 +34,15 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
   const keywords = req.query.keyword.toLowerCase().trim()
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keywords) || restaurant.name_en.toLowerCase().includes(keywords) ||
-    restaurant.category.toLowerCase().includes(keywords)
-  })
-  res.render('index', { restaurants: restaurants, keywords:  keywords })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      restaurants = restaurants.filter(restaurant => {
+        return restaurant.name.toLowerCase().includes(keywords) || restaurant.name_en.toLowerCase().includes(keywords) ||
+          restaurant.category.toLowerCase().includes(keywords)
+      })
+      res.render('index', { restaurants: restaurants, keywords: keywords })
+    })
 })
 
 app.get('/restaurants/new', (req, res) => {
