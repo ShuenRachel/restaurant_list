@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     phone: newRestaurant.phone,
     google_map: newRestaurant.google_map,
     rating: Number(newRestaurant.rating),
-    description: newRestaurant.description,
+    description: newRestaurant.description
   })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
