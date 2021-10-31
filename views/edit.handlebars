@@ -2,7 +2,7 @@
 
 <div class="container">
   <span class="text-danger"><small>*所有欄位都必須填寫</small></span>
-  <form action="/restaurants/{{ restaurant._id }}/edit" method="post">
+  <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="post">
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">中文名稱</label>
       <div class="col-sm-10">

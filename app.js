@@ -1,10 +1,11 @@
 const express = require('express')
-const app = express()
-const port = 3000
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
-const restaurantList = require('./restaurant.json')
+const methodOverride = require('method-override')
+
+const app = express()
+const port = 3000
 
 // 連線資料庫
 mongoose.connect('mongodb://localhost/restaurant-list')
@@ -24,6 +25,7 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // Index 頁面：瀏覽全部所有餐廳
 app.get('/', (req, res) => {
@@ -47,7 +49,7 @@ app.get('/search', (req, res) => {
     })
 })
 
-// New 頁面：新增一家餐廳
+// 新增一家餐廳
 app.post('/restaurants', (req, res) => {
   const newRestaurant = req.body
 
@@ -66,6 +68,7 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// New 頁面
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
@@ -80,7 +83,7 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 // 刪除一家餐廳
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
@@ -88,7 +91,7 @@ app.post('/restaurants/:id/delete', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// 修改一家餐廳的資訊
+// 修改頁面
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -97,7 +100,8 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+// 修改一家餐廳
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const updatedRestaurant = req.body
 

@@ -39,7 +39,7 @@
 
       <div class="row justify-content-center px-1">
         <a href="/restaurants/{{ restaurant._id }}/edit" class="btn btn-outline-secondary mr-1">編輯餐廳資訊</a>
-        <form action="/restaurants/{{ restaurant._id }}/delete" method="post">
+        <form action="/restaurants/{{ restaurant._id }}?_method=DELETE" method="post">
           <button type="submit" class="btn btn-outline-danger">刪除餐廳</button>
         </form>
       </div>
